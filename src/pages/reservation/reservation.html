@@ -1,0 +1,104 @@
+<!--
+  Generated template for the ReservationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Reservation</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="isNetworkUnavailable">
+    <p>You are offline. Please check your internet connection.</p>
+  </div>
+  <div *ngIf="!isNetworkUnavailable">
+    <ion-grid *ngIf="!isDeviceReleased">
+      <ion-row *ngIf="isAlreadyInReservation">
+        <ion-col>
+          <p>Your reservation details are as follows:</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Device Name</ion-label>
+            <ion-input type="text" readonly="true" [value]="isAlreadyInReservation ? deviceData?.deviceName : deviceInfo?.device.deviceName"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Start Date</ion-label>
+            <ion-datetime displayFormat="DDDD MMM D, YYYY" disabled [(ngModel)]="isAlreadyInReservation ? reservationStartDateString : startDateString"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Start Time</ion-label>
+            <ion-datetime displayFormat="hh:mm A" disabled [(ngModel)]="isAlreadyInReservation ? reservationStartDateString : startDateString"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <!-- <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Override</ion-label>
+            <ion-checkbox (click)="overrideDate()"></ion-checkbox>
+          </ion-item>
+        </ion-col>
+      </ion-row> -->
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>End Date</ion-label>
+            <ion-datetime displayFormat="DDDD MMM D, YYYY" disabled [(ngModel)]="isAlreadyInReservation ? reservationEndDateString : endDateString"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>End Time</ion-label>
+            <ion-datetime displayFormat="hh:mm A" disabled [(ngModel)]="isAlreadyInReservation ? reservationEndDateString : endDateString"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="!isAlreadyInReservation">
+        <ion-col>
+          <button ion-button round style="margin-left: 14px" (click)="reserveDevice()" [disabled]="undergoingReservation">Reserve Device</button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="isAlreadyInReservation">
+        <ion-col>
+          <button ion-button round style="margin-left: 14px" (click)="releaseDevice()" [disabled]="undergoingReservation">Release Device</button>
+        </ion-col>
+      </ion-row>
+
+      <!-- <ion-row>
+        <ion-col>
+          Please enter the details above to reserve this device and make it available for your use
+        </ion-col>
+      </ion-row> -->
+    </ion-grid>
+    <div *ngIf="isDeviceReleased">
+      <p>Device has been released. Thank you.</p>
+    </div>
+  </div>
+</ion-content>

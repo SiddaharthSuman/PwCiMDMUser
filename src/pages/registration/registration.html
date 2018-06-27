@@ -1,0 +1,51 @@
+<!--
+  Generated template for the RegistrationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <!-- <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button> -->
+    <ion-title>Registration</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="isNetworkUnavailable">
+    <p>You are offline. Please check your internet connection.</p>
+  </div>
+  <div *ngIf="!isNetworkUnavailable">
+    <div *ngIf="!isDeviceAdded">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label floating>Username</ion-label>
+              <ion-input type="text" name="title" clearInput="true" #username></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <button ion-button round style="margin-left: 14px" (click)="registerUser(username.value)">Register</button>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            Please enter your name to identify this device as yours
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div *ngIf="isDeviceAdded">
+      <p>Device has been registered, please show this code to the admin for activation:</p>
+      <p>{{code}}</p>
+    </div>
+  </div>
+</ion-content>
